@@ -17,6 +17,6 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		_inventories = (await ViewInventoriesByNameUseCase.ExecuteAsync("apple")).ToList();
+		_inventories = (await ViewInventoriesByNameUseCase.ExecuteAsync("Bike")).ToList();
 	}
 }
