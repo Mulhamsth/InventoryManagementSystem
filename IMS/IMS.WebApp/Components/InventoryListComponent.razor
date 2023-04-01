@@ -9,17 +9,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach(var inv in listInventories)
-		{
-			<tr>
-				<td>@inv.InventoryName</td>
-				<td>@inv.Quantity</td>
-				<td>@inv.Price.ToString("c")</td>
-				<td>
-					<button type="button" class="btn btn-light"></button>
-				</td>
-			</tr>
-		}
+		<InventoryListItemComponent Inventories="@listInventories"></InventoryListItemComponent>
 	</tbody>
 </table>
 
