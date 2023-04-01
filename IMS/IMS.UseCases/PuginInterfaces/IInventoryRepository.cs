@@ -11,6 +11,7 @@ namespace IMS.UseCases.PuginInterfaces
     {
         Task<IEnumerable<Inventory>> GetInventoriesByNameAsync(string name);
 		Task AddInventoryAsync(Inventory inventory);
-		Task ExistsAsync(Inventory inventory);
+		Task<bool> ExistsAsync(Inventory inventory);
+		Task UpdateInventoryAsync(Inventory inventory);
 	}
 }

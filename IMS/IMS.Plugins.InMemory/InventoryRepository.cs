@@ -1,5 +1,6 @@
 ﻿using IMS.CoreBusiness;
 using IMS.UseCases.PuginInterfaces;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography.X509Certificates;
 
 namespace IMS.Plugins.InMemory
@@ -30,15 +31,34 @@ namespace IMS.Plugins.InMemory
             return Task.CompletedTask;
 		}
 
-		public Task ExistsAsync(Inventory inventory)
-		{
-			throw new NotImplementedException();
-		}
 
 		public async Task<IEnumerable<Inventory>> GetInventoriesByNameAsync(string name)
         {
-            if (string.IsNullOrWhiteSpace(name)) return await Task.FromResult(_inventories);
+            if (string.IsNullOrWhiteSpace(name)) 
+                return await Task.FromResult(_inventories);
             return _inventories.Where(x => x.InventoryName.Contains(name, StringComparison.OrdinalIgnoreCase));
         }
-    }
+
+		public Task UpdateInventoryAsync(Inventory inventory)
+		{
+            if (_inventories.Any(x => x.InventoryId != inventory.InventoryId &&
+            x.InventoryName.Equals(inventory.InventoryName, StringComparison.OrdinalIgnoreCase)))
+                return Task.CompletedTask;
+
+            var inv = _inventories.FirstOrDefault(x => x.InventoryId == inventory.InventoryId);
+            if(inv != null)
+            {
+                inv.InventoryId = inventory.InventoryId;
+                inv.Price= inventory.Price;
+                inv.Quantity= inventory.Quantity;
+            }
+
+            return Task.CompletedTask;
+		}
+
+		Task<bool> IInventoryRepository.ExistsAsync(Inventory inventory)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
