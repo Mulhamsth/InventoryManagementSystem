@@ -1,4 +1,4 @@
-﻿
+﻿@inject NavigationManager NavigationManager
 @if(Inventories != null && Inventories.Count > 0)
 {
 	foreach (var inv in Inventories)
@@ -21,7 +21,7 @@
 	public List<Inventory> Inventories { get; set; } = new List<Inventory>();
 	private void EditInventory(int inventoryId)
 	{
-		
+		NavigationManager.NavigateTo($"/editinventory/{inventoryId}");
 	}
 
 }
