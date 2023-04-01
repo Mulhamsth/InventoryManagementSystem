@@ -39,6 +39,19 @@ namespace IMS.Plugins.InMemory
             return _inventories.Where(x => x.InventoryName.Contains(name, StringComparison.OrdinalIgnoreCase));
         }
 
+		public async Task<Inventory> GetInventoryByIdAsync(int InventoryId)
+		{
+            var inv = _inventories.First(x => x.InventoryId == InventoryId);
+            var newInv = new Inventory 
+            { 
+                InventoryId = inv.InventoryId,
+                InventoryName = inv.InventoryName,
+                Price = inv.Price,
+                Quantity = inv.Quantity,
+            };
+            return await Task.FromResult(newInv);
+		}
+
 		public Task UpdateInventoryAsync(Inventory inventory)
 		{
             if (_inventories.Any(x => x.InventoryId != inventory.InventoryId &&
