@@ -39,6 +39,7 @@ jobs:
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        working-directory: ./IMS/IMS.WebApp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
