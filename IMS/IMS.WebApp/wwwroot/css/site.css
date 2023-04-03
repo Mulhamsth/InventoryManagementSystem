@@ -20,7 +20,10 @@ a, .btn-link {
 
 .content {
     padding-top: 1.1rem;
+    width: 100%;
+    min-height: 80%;
 }
+
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
@@ -33,6 +36,19 @@ a, .btn-link {
 .validation-message {
     color: red;
 }
+
+.home-container {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url("img/inventory.jpg") rgba(0, 0, 0, 0.414);
+    background-blend-mode: multiply;
+    background-position: center center;
+}
+
 
 #blazor-error-ui {
     background: lightyellow;
