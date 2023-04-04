@@ -14,5 +14,6 @@ namespace IMS.UseCases.PuginInterfaces
 		Task AddInventoryAsync(Inventory inventory);
 		Task<bool> ExistsAsync(Inventory inventory);
 		Task UpdateInventoryAsync(Inventory inventory);
+		Task DeleteInventoryAsync(Inventory inventory);
 	}
 }
