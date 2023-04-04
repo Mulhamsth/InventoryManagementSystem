@@ -9,10 +9,10 @@
 			<td>@inv.Quantity</td>
 			<td>@inv.Price.ToString("c")</td>
 			<td>
-				<button type="button" class="btn btn-light" @onclick="@(() => EditInventory(inv.InventoryId))">Edit</button>
+				<button type="button" class="btn btn-success" @onclick="@(() => EditInventory(inv.InventoryId))">Edit</button>
 			</td>
 					<td>
-				<button type="button" class="btn btn-light" @onclick="@(() => DeleteInventory(inv))">Delete</button>
+				<button type="button" class="btn btn-danger" @onclick="@(() => DeleteInventory(inv))">Delete</button>
 					</td>
 		</tr>
 	}
@@ -27,10 +27,13 @@
 	{
 		NavigationManager.NavigateTo($"/editinventory/{inventoryId}");
 	}
+	[Parameter]
+	public EventCallback<string> OnDeleteInventory { get; set; }
 	private void DeleteInventory(Inventory inventory)
 	{
 		DeleteInventoryUseCase.ExecuteAsync(inventory);
-		NavigationManager.NavigateTo($"./inventories");
+		OnDeleteInventory.InvokeAsync();
 	}
+
 
 }
