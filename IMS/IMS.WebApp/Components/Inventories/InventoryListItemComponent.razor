@@ -10,10 +10,8 @@
 			<td>@inv.Price.ToString("c")</td>
 			<td>
 				<button type="button" class="btn btn-success" @onclick="@(() => EditInventory(inv.InventoryId))">Edit</button>
-			</td>
-					<td>
 				<button type="button" class="btn btn-danger" @onclick="@(() => DeleteInventory(inv))">Delete</button>
-					</td>
+			</td>
 		</tr>
 	}
 
