@@ -1,0 +1,11 @@
+*.json
+
+# ignore all .env files
+*.env
+
+#Ignroe debugs & releases
+**/obj/*
+**/bin/*
+
+#ignore every .vs directory
+**/.vs/
