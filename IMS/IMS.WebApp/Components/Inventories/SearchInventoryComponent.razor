@@ -1,10 +1,11 @@
-﻿
-<div class="input-group">
-	<input type="text" class="form-control" placeholder="Type inventory name here to search" 
-			@bind-value="inventoryNameToSearch" />
-	<button type="button" class="btn-success input-group-text"
-			@onclick="OnSearch">Search</button>
-</div>
+﻿<form onsubmit="@OnSearch">
+	<div class="input-group">
+		<MudTextField Immediate="true" Label="Type an inventory name to search for"
+		              Clearable="true" @bind-Value="inventoryNameToSearch"  Variant="Variant.Outlined"
+		              Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" OnAdornmentClick="OnSearch"
+		              AdornmentAriaLabel="Search"/>
+	</div>
+</form>
 
 
 @code {

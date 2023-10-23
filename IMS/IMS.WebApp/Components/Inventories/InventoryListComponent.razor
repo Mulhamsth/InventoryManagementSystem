@@ -1,17 +1,23 @@
 ﻿@inject IViewInventoriesByNameUseCase ViewInventoriesByNameUseCase
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Quantity</th>
-			<th>Price</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<InventoryListItemComponent Inventories="@listInventories" OnDeleteInventory="OnParametersSetAsync"></InventoryListItemComponent>
-	</tbody>
-</table>
+@inject IDeleteInventoryUseCase DeleteInventoryUseCase
+@inject NavigationManager NavigationManager
+
+<MudDataGrid T="Inventory" Items="@listInventories" Filterable="false" SortMode="SortMode.None" Groupable="false" Striped="true">
+	
+	<Columns>
+		<PropertyColumn Property="x => x.InventoryName" Title="Name"/>
+		<PropertyColumn Property="x => x.Quantity" />
+		<PropertyColumn Property="x => x.Price"  />
+		<TemplateColumn CellClass="d-flex justify-end">
+			<CellTemplate>
+				<MudStack Row>
+					<MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Tertiary" OnClick="() => EditInventory(context.Item.InventoryId)">Edit</MudButton>
+					<MudButton ButtonType="ButtonType.Button" Variant="Variant.Outlined" Color="Color.Error" OnClick="() => DeleteInventory(context.Item)">Delete</MudButton>
+				</MudStack>
+			</CellTemplate>
+		</TemplateColumn>
+	</Columns>
+</MudDataGrid>
 
 @code {
 	private List<Inventory> listInventories = new List<Inventory>();
@@ -22,5 +28,16 @@
 	protected override async Task OnParametersSetAsync()
 	{
 		listInventories = (await ViewInventoriesByNameUseCase.ExecuteAsync(this.searchTerm)).ToList();
+	}
+	
+	private void EditInventory(int inventoryId)
+	{
+		NavigationManager.NavigateTo($"/editinventory/{inventoryId}");
+	}
+	private async Task DeleteInventory(Inventory inventory)
+	{
+		DeleteInventoryUseCase.ExecuteAsync(inventory);
+		listInventories = (await ViewInventoriesByNameUseCase.ExecuteAsync(this.searchTerm)).ToList();
+		InvokeAsync(StateHasChanged);
 	}
 }

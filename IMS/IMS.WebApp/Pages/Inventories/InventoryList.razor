@@ -1,13 +1,15 @@
 ﻿@page "/inventories"
 @inject NavigationManager NavigationManager
 
-<h3>InventoryList</h3>
+<MudStack Row="true" Class="d-flex justify-content-between">
+<MudText Typo="Typo.h3">InventoryList</MudText>
+<MudButton ButtonType="ButtonType.Button" Color="Color.Info" Variant="Variant.Filled" OnClick="AddInventory">Add Inventory</MudButton>
+</MudStack>
 <br />
 <SearchInventoryComponent OnSearchInventory="OnInventorySearch"></SearchInventoryComponent>
 <br />
 <InventoryListComponent searchTerm="@searchterm"></InventoryListComponent>
 <br />
-<button type="button" class="btn btn-primary" @onclick="AddInventory">Add Inventory</button>
 
 @code {
 	private string searchterm = "";
